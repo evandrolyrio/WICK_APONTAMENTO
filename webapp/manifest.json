@@ -9,6 +9,16 @@
 		},
 		"title": "{{appTitle}}",
 		"description": "{{appDescription}}",
+		"dataSources": {
+			"Z_PASSAGEM_SRV": {
+				"uri": "/sap/opu/odata/sap/Z_PASSAGEM_SRV/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0",
+					"localUri": "localService/metadata.xml"
+				}
+			}
+		},
 		"sourceTemplate": {
 			"id": "ui5template.basicSAPUI5ApplicationProject",
 			"version": "1.40.12"
@@ -64,7 +74,17 @@
 				"settings": {
 					"bundleName": "Apontamento.paZPP_APONTAMENTO.i18n.i18n"
 				}
-			}
+			},
+			"": {
+				"type": "sap.ui.model.odata.v2.ODataModel",
+				"settings": {
+					"defaultOperationMode": "Server",
+					"defaultBindingMode": "OneTime",
+					"defaultCountMode": "Request"
+				},
+				"dataSource": "Z_PASSAGEM_SRV",
+				"preload": true
+			}			
 		},
 		"resources": {
 			"css": [{

@@ -1,12 +1,12 @@
 sap.ui.define([
-	"Apontamento/paZPP_APONTAMENTO/controller/BaseController"
+	"Apontamento/paZPP_APONTAMENTO/controller/BaseController",
 	"sap/ui/model/json/JSONModel",
 	"sap/ndc/BarcodeScanner",
 	"sap/m/MessageBox"	
-], function(Controller) {
+], function(BaseController, JSONModel, BarcodeScanner, MessageBox) {
 	"use strict";
 
-	return Controller.extend("Apontamento.paZPP_APONTAMENTO.controller.Apontamento", {
+	return BaseController.extend("Apontamento.paZPP_APONTAMENTO.controller.Apontamento", {
 
 	    onInit: function() {
 
@@ -63,18 +63,22 @@ sap.ui.define([
 							var barcode = scanned;
 							var oModel2 = that.getModel();
 							oModel2.invalidate();
-							oModel2.callFunction("/Transferencia", {
+							oModel2.callFunction("/Apontamento", {
 								method: "GET",
 								urlParameters: {
 									User: 'N',
 									Barcode: barcode,
 									Aufnr: that.getModel("viewModel").getProperty("/Aufnr")
 								},
-								success: function(Data) {	
-									that.getModel("viewModel").setProperty("/PassagemSet", Data.results);
-									that.getModel("viewModel").setProperty("/busy", false);
-									that.getView().byId("tbPassagem").getBinding("items").refresh();
-									that.lerCod();
+								success: function(Data) {
+									if	(Data.results.length === that.getView().byId("tbPassagem").getBinding("items").iLength) {
+										MessageBox.information("Não foi possível localizar a etiqueta");
+									} else {
+										that.getModel("viewModel").setProperty("/PassagemSet", Data.results);
+										that.getModel("viewModel").setProperty("/busy", false);
+										that.getView().byId("tbPassagem").getBinding("items").refresh();
+										that.lerCod();
+									}
 								},
 								error: function(error) {
 									that.getModel("viewModel").setProperty("/busy", false);
@@ -97,7 +101,7 @@ sap.ui.define([
 				var barcode = scanned;
 				var oModel = that.getModel();
 				oModel.invalidate();
-				oModel.callFunction("/Transferencia", {
+				oModel.callFunction("/Apontamento", {
 					method: "GET",
 					urlParameters: {
 						User: 'O',
@@ -105,10 +109,14 @@ sap.ui.define([
 						Aufnr: that.getModel("viewModel").getProperty("/Aufnr")
 					},
 					success: function(oData) {	
-						that.getModel("viewModel").setProperty("/PassagemSet", oData.results);
-						that.getModel("viewModel").setProperty("/busy", false);
-						that.getView().byId("tbMontaKIT").getBinding("items").refresh();
-						that.lerCod();
+						if	(oData.results.length === that.getView().byId("tbPassagem").getBinding("items").iLength) {
+							MessageBox.information("Não foi possível localizar a etiqueta");
+						} else {
+							that.getModel("viewModel").setProperty("/PassagemSet", oData.results);
+							that.getModel("viewModel").setProperty("/busy", false);
+							that.getView().byId("tbMontaKIT").getBinding("items").refresh();
+							that.lerCod();
+						}
 					},
 					error: function(error) {
 						that.getModel("viewModel").setProperty("/busy", false);

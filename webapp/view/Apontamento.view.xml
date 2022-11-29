@@ -1,10 +1,40 @@
 <mvc:View controllerName="Apontamento.paZPP_APONTAMENTO.controller.Apontamento" xmlns:html="http://www.w3.org/1999/xhtml"
-	xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m">
-	<App>
-		<pages>
-			<Page title="{i18n>title}">
-				<content></content>
-			</Page>
-		</pages>
-	</App>
+	xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m" xmlns:semantic="sap.f.semantic" xmlns:form="sap.ui.layout.form" xmlns:l="sap.ui.layout">
+	<semantic:SemanticPage id="mySemanticPage" headerPinnable="true" toggleHeaderOnTitleClick="false" headerExpanded="true" showFooter="false"
+		preserveHeaderStateOnScroll="false">
+		<semantic:headerContent>
+			<form:SimpleForm editable="true" layout="ResponsiveGridLayout" singleContainerFullSize="true" labelSpanXL="4" labelSpanL="3" labelSpanM="12"
+				labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1">
+				<Toolbar>
+					<ToolbarSpacer/>
+					<Button text="Ler Etiqueta" icon="sap-icon://bar-code" press="lerCod"/>
+				</Toolbar>
+			</form:SimpleForm>
+		</semantic:headerContent>
+		<semantic:content>
+			<IconTabBar select="handleFilterFromBar" class="sapUiResponsiveContentPadding">
+				<content>
+					<Table id="tbPassagem" class="custom_table" inset="false" items="{path: 'viewModel>/PassagemSet', parameters : { count: true } }"
+						busy="{viewModel>/busy}"> 
+						<columns>
+							<Column minScreenWidth="Desktop" demandPopin="true" popinDisplay="Inline">
+								<Text text="Nº Etiqueta para Leitura"/>
+							</Column>
+							<Column demandPopin="true">
+								<Text text="Apontamento"/>
+							</Column>							
+						</columns>
+						<items>
+							<ColumnListItem vAlign="Middle" press="displayReserva" type="Navigation" class="borda_destacada">
+								<cells>
+									<ObjectIdentifier title="{viewModel>Barcode}"/>
+									<Text text="{viewModel>Transferido}"/>									
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</content>
+			</IconTabBar>
+		</semantic:content>
+	</semantic:SemanticPage>
 </mvc:View>
