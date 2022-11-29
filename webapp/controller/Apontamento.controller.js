@@ -123,7 +123,11 @@ sap.ui.define([
 					}
 				});	
 			});					
-		}
+		},
+		onCloseDialog: function() {
+			this.oDialog.close();
+			this.oDialog.destroy(true);
+		}			
 
 	});
 });

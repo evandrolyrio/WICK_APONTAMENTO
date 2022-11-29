@@ -24,7 +24,6 @@
 			"version": "1.40.12"
 		}
 	},
-
 	"sap.ui": {
 		"technology": "UI5",
 		"icons": {
@@ -43,10 +42,8 @@
 		"supportedThemes": [
 			"sap_hcb",
 			"sap_belize"
-
 		]
 	},
-
 	"sap.ui5": {
 		"rootView": {
 			"viewName": "Apontamento.paZPP_APONTAMENTO.view.Apontamento",
@@ -84,12 +81,18 @@
 				},
 				"dataSource": "Z_PASSAGEM_SRV",
 				"preload": true
-			}			
+			}
 		},
 		"resources": {
-			"css": [{
-				"uri": "css/style.css"
-			}]
+			"css": [
+				{
+					"uri": "css/style.css"
+				}
+			]
 		}
+	},
+	"sap.platform.abap": {
+		"uri": "/sap/bc/ui5_ui5/sap/z_apontamento/webapp",
+		"_version": "1.1.0"
 	}
 }
