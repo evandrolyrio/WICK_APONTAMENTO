@@ -82,6 +82,7 @@ sap.ui.define([
 								},
 								error: function(error) {
 									that.getModel("viewModel").setProperty("/busy", false);
+									MessageBox.information("Etiqueta já lida");
 								}
 							});	
 						});																
@@ -120,6 +121,7 @@ sap.ui.define([
 					},
 					error: function(error) {
 						that.getModel("viewModel").setProperty("/busy", false);
+						MessageBox.information("Etiqueta já lida");
 					}
 				});	
 			});					
