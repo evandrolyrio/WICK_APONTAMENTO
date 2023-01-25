@@ -111,7 +111,7 @@ sap.ui.define([
 					},
 					success: function(oData) {	
 						if	(oData.results.length === that.getView().byId("tbPassagem").getBinding("items").iLength) {
-							MessageBox.information("Não foi possível localizar a etiqueta");
+							MessageBox.information("Erro na confirmação da ordem");
 						} else {
 							that.getModel("viewModel").setProperty("/PassagemSet", oData.results);
 							that.getModel("viewModel").setProperty("/busy", false);
