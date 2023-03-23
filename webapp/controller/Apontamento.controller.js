@@ -59,39 +59,39 @@ sap.ui.define([
 					    that.getModel("viewModel").setProperty("/busy", false);
 					    // that.oDialog.close();
 						// that.oDialog.destroy(true);
-						that.scanHU().then(function (scanned) {
-							var barcode = scanned;
+						// that.scanHU().then(function (scanned) {
+						// 	var barcode = scanned;
 							var oModel2 = that.getModel();
 							oModel2.invalidate();
 							oModel2.callFunction("/Apontamento", {
 								method: "GET",
 								urlParameters: {
 									User: 'N',
-									Barcode: barcode,
+									Barcode: '000011',
 									Aufnr: that.getModel("viewModel").getProperty("/Aufnr")
 								},
 								success: function(Data) {
 									if	(Data.results.length === that.getView().byId("tbPassagem").getBinding("items").iLength) {
-										MessageBox.information("Erro na confirmação da ordem");
+										// MessageBox.information("Erro na confirmação da ordem");
 									} else {
 										that.getModel("viewModel").setProperty("/PassagemSet", Data.results);
 										that.getModel("viewModel").setProperty("/busy", false);
 										that.getView().byId("tbPassagem").getBinding("items").refresh();
-										that.lerCod();
+										// that.lerCod();
 									}
 								},
 								error: function(error) {
 									that.getModel("viewModel").setProperty("/busy", false);
-									MessageBox.information("Etiqueta já lida");
+									// MessageBox.information("Etiqueta já lida");
 								}
 							});	
-						});																
+						// });																
 					}
 				},
 				error: function(error) {
 					// alert(this.oResourceBundle.getText("ErrorReadingProfile"));
 					// oGeneralModel.setProperty("/sideListBusy", false);
-					MessageBox.information("Erro");
+					MessageBox.information("Para essa OP as etiquetas já foram lidas");
 					that.getModel("viewModel").setProperty("/busy", false);
 				}
 			});
@@ -111,7 +111,7 @@ sap.ui.define([
 					},
 					success: function(oData) {	
 						if	(oData.results.length === that.getView().byId("tbPassagem").getBinding("items").iLength) {
-							MessageBox.information("Erro na confirmação da ordem");
+							MessageBox.information("Erro na confirmação da ordem ou etiqueta ja lida");
 						} else {
 							that.getModel("viewModel").setProperty("/PassagemSet", oData.results);
 							that.getModel("viewModel").setProperty("/busy", false);

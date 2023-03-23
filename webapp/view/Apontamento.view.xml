@@ -18,6 +18,9 @@
 						busy="{viewModel>/busy}"> 
 						<columns>
 							<Column minScreenWidth="Desktop" demandPopin="true" popinDisplay="Inline">
+								<Text text="Contador"/>
+							</Column>							
+							<Column minScreenWidth="Desktop" demandPopin="true" popinDisplay="Inline">
 								<Text text="Nº Etiqueta para Leitura"/>
 							</Column>
 							<Column demandPopin="true">
@@ -27,6 +30,7 @@
 						<items>
 							<ColumnListItem vAlign="Middle" press="displayReserva" type="Navigation" class="borda_destacada">
 								<cells>
+									<ObjectIdentifier title="{viewModel>Contador}"/>
 									<ObjectIdentifier title="{viewModel>Barcode}"/>
 									<Text text="{viewModel>Transferido}"/>									
 								</cells>
